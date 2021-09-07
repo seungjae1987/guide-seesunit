@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guide">
+	<!-- 데이터 처리  -->
+	<select id="retruveDate" resultType="HashMap" parameterType="HashMap">
+		<![CDATA[
+			select sig_cd, sig_kor_nm  
+			from public."TL_SCCO_SIG"
+		]]>
+	</select>
+	
+	<!-- 데이터 처리 (키값) -->
+	<select id="guide.retruveDateKey" resultType="HashMap" parameterType="HashMap">
+	<![CDATA[
+			select sig_cd, sig_kor_nm  
+			from public."TL_SCCO_SIG"
+			where sig_cd = #{key}
+		]]>
+	</select>
+</mapper>

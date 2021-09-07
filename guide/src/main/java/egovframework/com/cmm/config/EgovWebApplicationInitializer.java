@@ -75,7 +75,15 @@ public class EgovWebApplicationInitializer implements WebApplicationInitializer 
 		// Spring ServletContextListener 설정
 		//-------------------------------------------------------------
 		XmlWebApplicationContext rootContext = new XmlWebApplicationContext();
-		rootContext.setConfigLocations(new String[] { "classpath*:egovframework/spring/com/**/context-*.xml" });
+//		rootContext.setConfigLocations(new String[] { "classpath*:egovframework/spring/com/**/context-*.xml" });
+		String[] rootContextUrl = new String[] { "classpath*:egovframework/spring/com/**/context-idgn-File.xml", "classpath*:egovframework/spring/com/**/context-idgn-MailMsg.xml",
+				"classpath*:egovframework/spring/com/**/context-aspect.xml" , "classpath*:egovframework/spring/com/**/context-common.xml" , "classpath*:egovframework/spring/com/**/context-config.xml",
+				"classpath*:egovframework/spring/com/**/context-crypto.xml" , "classpath*:egovframework/spring/com/**/context-datasource.xml" , "classpath*:egovframework/spring/com/**/context-egovuserdetailshelper.xml",
+				"classpath*:egovframework/spring/com/**/context-mail.xml" ,"classpath*:egovframework/spring/com/**/context-mapper.xml" , "classpath*:egovframework/spring/com/**/context-properties.xml" ,
+				"classpath*:egovframework/spring/com/**/context-transaction.xml" , "classpath*:egovframework/spring/com/**/context-validator.xml" , "classpath*:egovframework/spring/com/**/context-whitelist.xml"
+		};
+		
+		rootContext.setConfigLocations( rootContextUrl );
 		//rootContext.setConfigLocations(new String[] { "classpath*:egovframework/spring/com/context-*.xml","classpath*:egovframework/spring/com/*/context-*.xml" });
 		rootContext.refresh();
 		rootContext.start();

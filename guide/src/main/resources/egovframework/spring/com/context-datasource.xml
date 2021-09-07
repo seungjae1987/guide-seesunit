@@ -91,14 +91,36 @@
 	</beans>
 
 	<!-- PostresSQL -->
-	<beans profile="postgres">  
+<!-- 	<beans profile="postgres">  
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${Globals.postgres.DriverClassName}"/>
 		<property name="url" value="${Globals.postgres.Url}" />
 		<property name="username" value="${Globals.postgres.UserName}"/>
 		<property name="password" value="#{egovEnvCryptoService.getPassword()}"/>
 	</bean>
+	</beans> -->
+<!-- PostresSQL -->
+	<beans profile="postgres">
+		<bean id="dataSourcePostgres" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+			<property name="driverClassName" value="${Globals.postgres.DriverClassName}"/>
+			<property name="url" value="${Globals.postgres.Url}" />
+			<property name="username" value="${Globals.postgres.UserName}"/>
+			<property name="password" value="${Globals.postgres.Password}"/>
+		</bean>
+		<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+			<constructor-arg ref="dataSourcePostgres" />
+			<property name="logFormatter">
+				<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+					<property name="loggingType" value="MULTI_LINE" />
+					<property name="sqlPrefix"
+							  value="#### SQL ####&#xD;&#xA;
+
+    			"/>
+				</bean>
+			</property>
+		</bean>
 	</beans>
+
 
     <!-- DB Pool이 생성이 되더라고 특정 시간 호출되지 않으면 DBMS 설정에 따라 연결을 끊어질 때
 		이 경우 DBCP를 사용하셨다면.. 다음과 같은 설정을 추가하시면 연결을 유지시켜 줍니다. -->
